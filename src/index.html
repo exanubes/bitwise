@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="Free tool for testing bitwise operations" />
+        <!-- <link rel="icon" href="../assets/logo_favicon.svg" type="image/svg+xml" /> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>bitwise</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script>
+            (function () {
+                const STORAGE_KEY = 'typedef-theme-preference';
+                const stored = localStorage.getItem(STORAGE_KEY);
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored || (systemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            })();
+        </script>
+    </head>
+    <body>
+        <script type="module" src="app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+{
+    "name": "@exanubes/bitwise",
+    "version": "1.0.0",
+    "description": "",
+    "source": "src/index.html",
+    "targets": {
+        "dev": {
+            "distDir": "./dist"
+        }
+    },
+    "scripts": {
+        "start": "parcel",
+        "lint": "eslint src/**/*.{js,html} && stylelint src/**/*.css",
+        "lint:fix": "eslint src/**/*.{js,html} --fix && stylelint src/**/*.css --fix",
+        "format": "prettier --write \"src/**/*.{js,css,html}\"",
+        "format:check": "prettier --check \"src/**/*.{js,css,html}\"",
+        "check": "pnpm run format:check && pnpm run lint"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "packageManager": "pnpm@10.29.2",
+    "devDependencies": {
+        "@html-eslint/eslint-plugin": "^0.55.0",
+        "@html-eslint/parser": "^0.55.0",
+        "eslint": "^10.0.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-html": "^8.1.4",
+        "eslint-plugin-jsdoc": "^62.5.4",
+        "eslint-plugin-prettier": "^5.5.5",
+        "parcel": "^2.16.4",
+        "prettier": "^3.8.1",
+        "stylelint": "^17.3.0",
+        "stylelint-config-prettier": "^9.0.5",
+        "stylelint-config-standard": "^40.0.0",
+        "stylelint-prettier": "^5.0.3"
+    }
+}
