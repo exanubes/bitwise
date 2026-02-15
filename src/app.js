@@ -50,3 +50,38 @@ const ten = Integer.create(0);
 console.log(ten.decimal());
 console.log(ten.binary());
 console.log(ten.is_zero());
+
+/**
+ * @param {Integer} a
+ * @param {Integer} b
+ * @returns {Integer}
+ */
+function and(a, b) {}
+
+/**
+ * @param {Integer} a
+ * @param {Integer} b
+ * @returns {Integer}
+ */
+function or(a, b) {}
+
+/**
+ * @param {Integer} a
+ * @param {Integer} b
+ * @returns {Integer}
+ */
+function xor(a, b) {}
+
+/**
+ * @param {Integer} a
+ * @param {Integer} b
+ * @returns {Integer}
+ */
+function lshift(a, b) {}
+
+/**
+ * @param {Integer} a
+ * @param {Integer} b
+ * @returns {Integer}
+ */
+function rshift(a, b) {}
