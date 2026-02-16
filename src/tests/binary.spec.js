@@ -46,3 +46,48 @@ describe('bitwise.and', () => {
         });
     });
 });
+
+describe('bitwise.or', () => {
+    const tests = [
+        {
+            a: 10,
+            b: 2,
+            expected: { decimal: 10n, binary: '1010', err: null },
+        },
+
+        {
+            a: 100,
+            b: 20,
+            expected: { decimal: 116n, binary: '1110100', err: null },
+        },
+
+        {
+            a: 234103421n,
+            b: 12318n,
+            expected: { decimal: 234107519n, binary: '1101111101000011001001111111', err: null },
+        },
+
+        {
+            a: 890271318724390428492n,
+            b: 902349129491238914011n,
+            expected: {
+                decimal: 902377003777611571167n,
+                binary: '1100001110101011111111000111111110111111111101110111001001111111011111',
+                err: null,
+            },
+        },
+    ];
+
+    tests.forEach((t) => {
+        test(`${t.a} | ${t.b}`, () => {
+            const [a] = Integer.create(t.a);
+            const [b] = Integer.create(t.b);
+
+            const [result, err] = Bitwise.or(a, b);
+
+            expect(err).toBe(t.expected.err);
+            expect(result.decimal()).toBe(t.expected.decimal);
+            expect(result.binary()).toBe(t.expected.binary);
+        });
+    });
+});

@@ -21,7 +21,7 @@ const OPERATIONS = {
 /**
  * @param {Integer} a
  * @param {Integer} b
- * @returns {[Integer, Error, null]}
+ * @returns {[Integer, Error | null]}
  */
 export function and(_a, _b) {
     const [a, b] = normalize_binary(_a.binary(), _b.binary());
@@ -40,34 +40,48 @@ export function and(_a, _b) {
 /**
  * @param {Integer} a
  * @param {Integer} b
- * @returns {Integer}
+ * @returns {[Integer, Error | null]}
  */
-function or(a, b) {}
+export function or(_a, _b) {
+    const [a, b] = normalize_binary(_a.binary(), _b.binary());
+    let result = '';
+
+    for (let index = 0; index < a.length; index += 1) {
+        if (a[index] === '1' || b[index] === '1') {
+            result += '1';
+        } else {
+            result += '0';
+        }
+    }
+
+    return Integer.from_binary(result);
+}
 
 /**
  * @param {Integer} a
  * @param {Integer} b
- * @returns {Integer}
+ * @returns {[Integer, Error | null]}
  */
 function xor(a, b) {}
 
 /**
  * @param {Integer} a
  * @param {Integer} b
- * @returns {Integer}
+ * @returns {[Integer, Error | null]}
  */
 function lshift(a, b) {}
 
 /**
  * @param {Integer} a
  * @param {Integer} b
- * @returns {Integer}
+ * @returns {[Integer, Error | null]}
  */
 function rshift(a, b) {}
 
 /**
  * @param {string} a
  * @param {string} b
+ * @returns {[string, string]}
  */
 export function normalize_binary(a, b) {
     if (a.length === b.length) {

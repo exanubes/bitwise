@@ -18,7 +18,7 @@ export class Integer {
         let decimal = BigInt(0);
         let index = 0;
         let bit = input.length - 1;
-        while (bit > 0) {
+        while (bit >= 0) {
             if (input[index] === '1') {
                 decimal += BigInt(2) ** BigInt(bit);
             }
