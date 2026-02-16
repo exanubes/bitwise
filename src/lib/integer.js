@@ -6,12 +6,17 @@ export class Integer {
         this._value = BigInt(value);
     }
 
-    static from_binary(binary) {
+    //TODO: validate input
+    static from_binary(input) {
+        if (!is_binary(input)) {
+            return [new Integer(0), new Error('Expected binary number, received: ', input)];
+        }
+
         let decimal = BigInt(0);
         let index = 0;
-        let bit = binary.length - 1;
+        let bit = input.length - 1;
         while (bit > 0) {
-            if (binary[index] === '1') {
+            if (input[index] === '1') {
                 decimal += BigInt(2) ** BigInt(bit);
             }
 
@@ -19,7 +24,7 @@ export class Integer {
             bit -= 1;
         }
 
-        return new Integer(decimal);
+        return [new Integer(decimal), null];
     }
 
     static create(input) {
@@ -29,7 +34,7 @@ export class Integer {
             return [new Integer(0), new Error('Expected an integer, received: ', value)];
         }
 
-        return new Integer(value);
+        return [new Integer(value), null];
     }
 
     decimal() {
@@ -51,4 +56,7 @@ export class Integer {
     is_zero() {
         return this._value === BigInt(0);
     }
+}
+function is_binary(input) {
+    return /^[01]+$/.test(input); //
 }
