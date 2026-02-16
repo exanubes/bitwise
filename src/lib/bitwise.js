@@ -21,7 +21,7 @@ const OPERATIONS = {
 /**
  * @param {Integer} a
  * @param {Integer} b
- * @returns {Integer}
+ * @returns {[Integer, Error, null]}
  */
 export function and(_a, _b) {
     const [a, b] = normalize_binary(_a.binary(), _b.binary());

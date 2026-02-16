@@ -6,7 +6,10 @@ export class Integer {
         this._value = BigInt(value);
     }
 
-    //TODO: validate input
+    /**
+     * @param {string} input
+     * @returns {[Integer, Error | null]} integer and error tuple
+     */
     static from_binary(input) {
         if (!is_binary(input)) {
             return [new Integer(0), new Error('Expected binary number, received: ', input)];
@@ -27,6 +30,10 @@ export class Integer {
         return [new Integer(decimal), null];
     }
 
+    /**
+     * @param {number | string| bigint} input
+     * @returns {[Integer, Error | null]}
+     */
     static create(input) {
         const value = typeof input !== 'string' ? String(input) : input;
 
