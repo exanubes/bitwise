@@ -10,11 +10,28 @@ const OPERATIONS = {
     RSHIFT: '>>',
 };
 
-class Integer {
+export class Integer {
     /**@private*/
     constructor(value) {
         this._value = BigInt(value);
     }
+
+    static from_binary(binary) {
+        let decimal = BigInt(0);
+        let index = 0;
+        let bit = binary.length - 1;
+        while (bit > 0) {
+            if (binary[index] === '1') {
+                decimal += BigInt(2) ** BigInt(bit);
+            }
+
+            index += 1;
+            bit -= 1;
+        }
+
+        return new Integer(decimal);
+    }
+
     static create(input) {
         const value = typeof input !== 'string' ? String(input) : input;
 
@@ -31,13 +48,14 @@ class Integer {
     binary() {
         let current = this._value;
         const quotient = BigInt(2);
-        const result = [];
+        let result = '';
+
         while (current !== BigInt(0)) {
-            result.unshift(Number(current % quotient));
+            result = Number(current % quotient) + result;
             current /= quotient;
         }
 
-        return result.join('') | '0';
+        return result || '0';
     }
 
     is_zero() {
@@ -45,7 +63,8 @@ class Integer {
     }
 }
 
-const ten = Integer.create(0);
+const ten = Integer.create(100);
+const two = Integer.create(20);
 
 console.log(ten.decimal());
 console.log(ten.binary());
