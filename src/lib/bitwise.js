@@ -62,7 +62,20 @@ export function or(_a, _b) {
  * @param {Integer} b
  * @returns {[Integer, Error | null]}
  */
-function xor(a, b) {}
+export function xor(_a, b) {
+    const [a, b] = normalize_binary(_a.binary(), _b.binary());
+    let result = '';
+
+    for (let index = 0; index < a.length; index += 1) {
+        if ((a[index] === '1' && b[index] === '0') || (a[index] === '0' && b[index] === '1')) {
+            result += '1';
+        } else {
+            result += '0';
+        }
+    }
+
+    return Integer.from_binary(result);
+}
 
 /**
  * @param {Integer} a
