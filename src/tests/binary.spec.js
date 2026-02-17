@@ -136,3 +136,132 @@ describe('bitwise.xor', () => {
         });
     });
 });
+
+describe('bitwise.lshift', () => {
+    const tests = [
+        {
+            a: 10,
+            b: 2,
+            expected: { decimal: 40n, binary: '101000', err: null },
+        },
+
+        {
+            a: 100,
+            b: 20,
+            expected: { decimal: 104857600n, binary: '110010000000000000000000000', err: null },
+        },
+
+        {
+            a: 234103421n,
+            b: 12n,
+            expected: {
+                decimal: 958887612416n,
+                binary: '1101111101000010001001111101000000000000',
+                err: null,
+            },
+        },
+
+        {
+            a: 890271318724390428492n,
+            b: 4n,
+            expected: {
+                decimal: 14244341099590246855872n,
+                binary: '11000001000010111111110001011110000101001011011101110000011111010011000000',
+                err: null,
+            },
+        },
+    ];
+
+    tests.forEach((t) => {
+        test(`${t.a} << ${t.b}`, () => {
+            const [a] = Integer.create(t.a);
+            const [b] = Integer.create(t.b);
+
+            const [result, err] = Bitwise.lshift(a, b);
+
+            expect(err).toBe(t.expected.err);
+            expect(result.decimal()).toBe(t.expected.decimal);
+            expect(result.binary()).toBe(t.expected.binary);
+        });
+    });
+});
+
+describe('bitwise.rshift', () => {
+    const tests = [
+        {
+            a: 10,
+            b: 2,
+            expected: { decimal: 2n, binary: '10', err: null },
+        },
+
+        {
+            a: 100,
+            b: 20,
+            expected: { decimal: 0n, binary: '0', err: null },
+        },
+
+        {
+            a: 100,
+            b: 2,
+            expected: { decimal: 25n, binary: '11001', err: null },
+        },
+
+        {
+            a: 234103421n,
+            b: 12n,
+            expected: {
+                decimal: 57154n,
+                binary: '1101111101000010',
+                err: null,
+            },
+        },
+
+        {
+            a: 890271318724390428492n,
+            b: 4n,
+            expected: {
+                decimal: 55641957420274401780n,
+                binary: '110000010000101111111100010111100001010010110111011100000111110100',
+                err: null,
+            },
+        },
+        {
+            a: 234103421n,
+            b: 12318n,
+            expected: { decimal: 0n, binary: '0', err: null },
+        },
+
+        {
+            a: 902349129491238914011n,
+            b: 30n,
+            expected: {
+                decimal: 840378114479n,
+                binary: '1100001110101010011100000110000110101111',
+                err: null,
+            },
+        },
+
+        {
+            a: 902349129491238914011n,
+            b: 69n,
+            expected: {
+                decimal: 1n,
+                binary: '1',
+                err: null,
+            },
+        },
+    ];
+
+    tests.forEach((t) => {
+        test(`${t.a} >> ${t.b}`, () => {
+            const [a] = Integer.create(t.a);
+            const [b] = Integer.create(t.b);
+
+            const [result, err] = Bitwise.rshift(a, b);
+
+            expect(err).toBe(t.expected.err);
+            expect(result.decimal()).toBe(t.expected.decimal);
+            expect(result.binary()).toBe(t.expected.binary);
+        });
+    });
+});

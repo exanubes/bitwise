@@ -82,14 +82,19 @@ export function xor(_a, _b) {
  * @param {Integer} b
  * @returns {[Integer, Error | null]}
  */
-function lshift(a, b) {}
+export function lshift(a, b) {
+    return Integer.from_binary(a.binary() + '0'.repeat(Number(b.decimal())));
+}
 
 /**
  * @param {Integer} a
  * @param {Integer} b
  * @returns {[Integer, Error | null]}
  */
-function rshift(a, b) {}
+export function rshift(a, b) {
+    const binary = a.binary();
+    return Integer.from_binary(binary.substring(0, binary.length - Number(b.decimal())));
+}
 
 /**
  * @param {string} a

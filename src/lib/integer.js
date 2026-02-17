@@ -11,6 +11,10 @@ export class Integer {
      * @returns {[Integer, Error | null]} integer and error tuple
      */
     static from_binary(input) {
+        if (!input) {
+            return [new Integer(0), null];
+        }
+
         if (!is_binary(input)) {
             return [new Integer(0), new Error('Expected binary number, received: ', input)];
         }
