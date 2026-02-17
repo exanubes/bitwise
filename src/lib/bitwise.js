@@ -58,11 +58,11 @@ export function or(_a, _b) {
 }
 
 /**
- * @param {Integer} a
- * @param {Integer} b
+ * @param {Integer} _a
+ * @param {Integer} _b
  * @returns {[Integer, Error | null]}
  */
-export function xor(_a, b) {
+export function xor(_a, _b) {
     const [a, b] = normalize_binary(_a.binary(), _b.binary());
     let result = '';
 
