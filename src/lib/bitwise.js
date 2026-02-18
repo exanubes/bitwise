@@ -6,10 +6,6 @@ import { Integer } from './integer.js';
  * @typedef {keyof typeof OPERATIONS} BITWISE_OPERATIONS
  * */
 
-/**
- * @typedef {import("./integer").Integer} Integer
- */
-
 const OPERATIONS = {
     XOR: '^',
     OR: '|',
@@ -19,8 +15,8 @@ const OPERATIONS = {
 };
 
 /**
- * @param {Integer} a
- * @param {Integer} b
+ * @param {Integer} _a
+ * @param {Integer} _b
  * @returns {[Integer, Error | null]}
  */
 export function and(_a, _b) {
@@ -38,8 +34,8 @@ export function and(_a, _b) {
 }
 
 /**
- * @param {Integer} a
- * @param {Integer} b
+ * @param {Integer} _a
+ * @param {Integer} _b
  * @returns {[Integer, Error | null]}
  */
 export function or(_a, _b) {

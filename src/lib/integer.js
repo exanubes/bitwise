@@ -1,7 +1,13 @@
 'use strict';
 
+/**
+ * @class Integer
+ */
 export class Integer {
-    /**@private*/
+    /**
+     * @private
+     * @param {number | bigint | string} value
+     * */
     constructor(value) {
         this._value = BigInt(value);
     }
@@ -16,7 +22,7 @@ export class Integer {
         }
 
         if (!is_binary(input)) {
-            return [new Integer(0), new Error('Expected binary number, received: ', input)];
+            return [new Integer(0), new Error(`Expected binary number, received: ${input}`)];
         }
 
         let decimal = BigInt(0);
@@ -35,22 +41,30 @@ export class Integer {
     }
 
     /**
-     * @param {number | string| bigint} input
+     * @param {number | string | bigint} input
      * @returns {[Integer, Error | null]}
      */
     static create(input) {
         const value = typeof input !== 'string' ? String(input) : input;
 
         if (value.includes('.') || value.includes(',')) {
-            return [new Integer(0), new Error('Expected an integer, received: ', value)];
+            return [new Integer(0), new Error(`Expected an integer, received: ${value}`)];
         }
 
         return [new Integer(value), null];
     }
 
+    /**
+     * @returns {bigint}
+     */
     decimal() {
+        //TODO: Return string
         return this._value;
     }
+
+    /**
+     * @returns {string}
+     */
     binary() {
         let current = this._value;
         const quotient = BigInt(2);
@@ -64,10 +78,18 @@ export class Integer {
         return result || '0';
     }
 
+    /**
+     * @returns {boolean}
+     */
     is_zero() {
         return this._value === BigInt(0);
     }
 }
+
+/**
+ * @param {string} input
+ * @returns {boolean}
+ */
 function is_binary(input) {
     return /^[01]+$/.test(input); //
 }
