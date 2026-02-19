@@ -18,6 +18,7 @@ import { format_binary } from './operand.js';
  * @property {string} title
  * @property {string=} label
  * @property {bit_cell[][]} rows
+ * @property {string} operator_name
  */
 
 /**
@@ -35,6 +36,7 @@ function explain_bitwise(operator_name, left_operand, right_operand, computation
     const result_binary = computation_result.binary().padStart(left_binary.length, '0');
 
     return {
+        operator_name,
         title: 'Bitwise ' + operator_name.toUpperCase(),
         rows: [
             build_bit_cells(left_binary),
@@ -69,6 +71,7 @@ function explain_shift(shift_operator, left_operand, right_operand, computation_
             ' to the ' +
             direction,
         rows: [build_shift_cells(shift_operator, original_binary, result_binary, shift_amount)],
+        operator_name: shift_operator,
     };
 }
 
@@ -152,6 +155,14 @@ export function resolve_explanation_function(operator_name) {
     return fn;
 }
 
+const operator_name_description = Object.freeze({
+    and: 'Sets each bit to 1 only if the corresponding bits in both operands are 1.',
+    or: 'Sets each bit to 1 if at least one of the corresponding bits is 1.',
+    xor: 'Sets each bit to 1 if the corresponding bits differ.',
+    lshift: 'Shifts all bits left by x positions, filling with 0s on the right.',
+    rshift: 'Shifts all bits right by x positions, dropping the right-most bits.',
+});
+
 export function render_explanation(model) {
     const dialog = document.createElement('dialog');
     dialog.className = 'expr-explanation-dialog';
@@ -159,8 +170,10 @@ export function render_explanation(model) {
     const heading = document.createElement('h2');
     heading.textContent = model.title;
 
-    dialog.appendChild(heading);
+    const description = document.createElement('p');
+    description.innerText = operator_name_description[model.operator_name];
 
+    dialog.append(heading, description);
     if (model.label) {
         const label = document.createElement('div');
         label.className = 'expr-explanation__shift-label';

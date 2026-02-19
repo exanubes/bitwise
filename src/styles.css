@@ -332,6 +332,12 @@ header svg path {
     color: var(--color-text);
 }
 
+.expr-explanation-dialog p {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text);
+}
+
 .expr-explanation {
     font-family: var(--font-mono);
     font-size: 1rem;
