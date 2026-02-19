@@ -1,14 +1,20 @@
 'use strict';
 
-import { Integer } from './lib/integer';
-import * as Bitwise from './lib/bitwise';
+import { create_row_adapter } from './lib/dom';
 
-const [ten] = Integer.create(100);
-const [two] = Integer.create(20);
-const [result_and] = Bitwise.and(ten, two);
-const [result_or] = Bitwise.or(ten, two);
-const [result_xor] = Bitwise.xor(ten, two);
+const rows = [];
 
-console.log(result_and.decimal(), result_and.binary());
-console.log(result_or.decimal(), result_or.binary());
-console.log(result_xor.decimal(), result_xor.binary());
+const container = document.getElementById('rows');
+
+function add_row(prefill = null) {
+    const row = create_row_adapter(prefill);
+    rows.push(row);
+    container.appendChild(row.el);
+}
+
+add_row(null);
+
+document.getElementById('add-row-btn').addEventListener('click', () => {
+    const prev = rows[rows.length - 1];
+    add_row(prev?.controller.result ?? null);
+});

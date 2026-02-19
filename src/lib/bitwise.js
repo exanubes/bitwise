@@ -3,18 +3,6 @@
 import { Integer } from './integer.js';
 
 /**
- * @typedef {keyof typeof OPERATIONS} BITWISE_OPERATIONS
- * */
-
-const OPERATIONS = {
-    XOR: '^',
-    OR: '|',
-    AND: '^&',
-    LSHIFT: '<<',
-    RSHIFT: '>>',
-};
-
-/**
  * @param {Integer} _a
  * @param {Integer} _b
  * @returns {[Integer, Error | null]}
