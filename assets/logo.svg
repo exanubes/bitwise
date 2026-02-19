@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 512">
+  <defs>
+    <style>
+      .stroke { stroke:currentColor; stroke-width:20; stroke-linecap:round; stroke-linejoin:round; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    </style>
+  </defs>
+
+  <!-- Hex badge -->
+  <polygon points="256,64 416,160 416,352 256,448 96,352 96,160"
+           fill="none" class="stroke"/>
+
+  <!-- Bit grid -->
+  <text x="180" y="230" font-size="56" class="mono" fill="currentColor">1 0</text>
+  <text x="180" y="300" font-size="56" class="mono" fill="currentColor">0 1</text>
+
+  <!-- Divider line (builder concept) -->
+  <line x1="160" y1="330" x2="352" y2="330" class="stroke"/>
+
+  <!-- Wordmark -->
+  <text x="456" y="337" font-size="230" class="mono" fill="currentColor">bitwise</text>
+
+</svg>

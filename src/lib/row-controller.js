@@ -14,9 +14,11 @@ export const INPUT_TYPE = {
 };
 
 export class RowController {
+    /**@type {Record<string, import('./integer').Integer>}*/ last_computation;
     constructor({ on_result, on_error, on_operand_sync }) {
         this.operator = 'and';
         this.result = null;
+        this.last_computation = null;
 
         this.operands = {
             [OPERANDS.LEFT]: { mode: INPUT_TYPE.DECIMAL, decimal: '0', binary: '0000' },
@@ -33,12 +35,12 @@ export class RowController {
     }
 
     set_operand_value(side, value) {
-        const op = this.operands[side];
+        const operand = this.operands[side];
 
-        if (op.mode === INPUT_TYPE.DECIMAL) {
-            op.decimal = value;
+        if (operand.mode === INPUT_TYPE.DECIMAL) {
+            operand.decimal = value;
         } else {
-            op.binary = value;
+            operand.binary = value;
         }
 
         this.sync_operand(side);
@@ -104,6 +106,7 @@ export class RowController {
         const expr = new BitwiseExpression(this.operator);
         const [result, err] = expr.execute(a, b);
 
+        console.log({ result, err });
         if (err) {
             this.result = null;
             this.on_error(err.message);
@@ -111,6 +114,7 @@ export class RowController {
         }
 
         this.result = result;
+        this.last_computation = { a, b };
 
         this.on_result({
             decimal: result.decimal().toString(),

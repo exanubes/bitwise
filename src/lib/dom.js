@@ -1,4 +1,7 @@
 import { INPUT_TYPE, OPERANDS, RowController } from './row-controller';
+import { normalize_binary } from './bitwise';
+import { format_binary } from './operand';
+import { render_explanation, resolve_explanation_function } from './explain';
 
 const ROW_TEMPLATE = `
 <div class="expr-row__inputs">
@@ -8,7 +11,7 @@ const ROW_TEMPLATE = `
         </div>
         <button type="button" class="expr-row__swap-btn" data-side="a" title="Swap input mode">&#8693;</button>
         <div class="expr-row__binary">
-            <input type="text" placeholder="Binary" readonly />
+            <input type="text" placeholder="Binary" readonly disabled />
         </div>
     </div>
 
@@ -28,7 +31,7 @@ const ROW_TEMPLATE = `
         </div>
         <button type="button" class="expr-row__swap-btn" data-side="b" title="Swap input mode">&#8693;</button>
         <div class="expr-row__binary">
-            <input type="text" placeholder="Binary" readonly />
+            <input type="text" placeholder="Binary" readonly disabled/>
         </div>
     </div>
 
@@ -36,7 +39,10 @@ const ROW_TEMPLATE = `
 </div>
 
 <div class="expr-row__result">
-    <span class="expr-row__result-decimal"></span>
+    <div class="expr-row__result-decimal-container">
+        <span class="expr-row__result-decimal"></span>
+        <button type="button" class="expr-row__explain">Explain</button>
+    </div>
     <span class="expr-row__result-binary"></span>
 </div>
 
@@ -62,6 +68,7 @@ function cache_dom(root) {
         result: root.querySelector('.expr-row__result'),
         result_decimal: root.querySelector('.expr-row__result-decimal'),
         result_binary: root.querySelector('.expr-row__result-binary'),
+        explain_btn: root.querySelector('.expr-row__explain'),
         error: root.querySelector('.expr-row__error'),
     };
 }
@@ -130,6 +137,36 @@ export function create_row_adapter(prefill = null) {
 
     dom.equals.addEventListener('click', () => {
         controller.compute();
+    });
+
+    dom.explain_btn.addEventListener('click', function () {
+        const last_computation = controller.last_computation;
+
+        const computation_result = controller.result;
+
+        if (!last_computation || !computation_result) {
+            return;
+        }
+
+        const left_operand = last_computation.a;
+
+        const right_operand = last_computation.b;
+
+        const operator_name = controller.operator;
+        const explain_function = resolve_explanation_function(operator_name);
+
+        const model = explain_function(
+            operator_name,
+            left_operand,
+            right_operand,
+            computation_result
+        );
+
+        const dialog = render_explanation(model);
+
+        dom.result.closest('.expr-row').appendChild(dialog);
+
+        dialog.showModal();
     });
 
     if (prefill) {
