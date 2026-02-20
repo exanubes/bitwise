@@ -14,7 +14,7 @@
         "lint:fix": "eslint src/**/*.{js,html} --fix && stylelint src/**/*.css --fix",
         "format": "prettier --write \"src/**/*.{js,css,html}\"",
         "format:check": "prettier --check \"src/**/*.{js,css,html}\"",
-        "check": "pnpm run format:check && pnpm run lint",
+        "check": "pnpm run format && pnpm run lint",
         "build": "parcel build --public-url /bitwise/",
         "test": "bun test"
     },

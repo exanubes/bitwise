@@ -22,10 +22,10 @@ import { format_binary } from './operand.js';
  */
 
 /**
+ * @param {string} operator_name
  * @param {*} left_operand
  * @param {*} right_operand
  * @param {*} computation_result
- * @param {string} operator_name
  * @returns {explanation_model}
  */
 function explain_bitwise(operator_name, left_operand, right_operand, computation_result) {

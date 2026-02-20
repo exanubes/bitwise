@@ -268,8 +268,7 @@ header svg path {
 
 .expr-row__result--visible {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    flex-flow: column wrap;
 }
 
 .expr-row__result-decimal {
@@ -326,6 +325,7 @@ header svg path {
     background: rgba(0, 0, 0, 0.4);
     filter: blur(3px);
 }
+
 .expr-explanation-dialog h2 {
     font-size: 1rem;
     margin-bottom: var(--spacing-sm);
@@ -346,9 +346,11 @@ header svg path {
     gap: 4px;
     margin-bottom: var(--spacing-sm);
 }
+
 .expr-explanation__row {
     display: flex;
 }
+
 .expr-explanation__divider {
     height: 1px;
     background: var(--color-border);
@@ -370,12 +372,15 @@ header svg path {
     text-align: center;
     color: var(--color-text);
 }
+
 .bit--gained {
     color: var(--color-success);
 }
+
 .bit--lost {
     color: var(--color-error);
 }
+
 .bit--strikethrough {
     text-decoration: line-through;
 }
@@ -385,7 +390,7 @@ header svg path {
     margin-top: var(--spacing-sm);
     padding: 6px var(--spacing-sm);
     background: var(--color-primary);
-    color: #fff;
+    color: #ffffff;
     border: none;
     border-radius: var(--border-radius);
     font-family: var(--font-body);
@@ -393,9 +398,11 @@ header svg path {
     cursor: pointer;
     width: 100%;
 }
+
 .expr-explanation__close:hover {
     background: var(--color-primary-hover);
 }
+
 .bit:nth-child(4n) {
     margin-right: 8.5px;
 }
