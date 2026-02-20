@@ -2,6 +2,13 @@
 
 A hands-on learning tool for understanding bitwise operations. Every operation — including binary ↔ decimal conversion — is implemented manually without abstractions to see exactly how the math works under the hood.
 
+## Quick Start
+
+```bash
+pnpm install
+pnpm dev
+```
+
 ## Operations Covered
 
 - **AND** — bits set in both operands
@@ -17,9 +24,6 @@ A hands-on learning tool for understanding bitwise operations. Every operation �
 - Binary and decimal display side-by-side
 - Dark/light theme toggle
 
-## Quick Start
+![Application](./assets/app.png)
 
-```bash
-pnpm install
-pnpm dev
-```
+![Explain dialog](./assets/explain.png)
